@@ -1,0 +1,34 @@
+language: erlang
+
+env:
+  global:
+    - LUAROCKS_VER=2.1.0
+    - LUAROCKS_BASE=luarocks-$LUAROCKS_VER
+    - LUAROCKS_INSTALL=wget
+    - LUAROCKS_GITTAG=master
+    # - LUAROCKS_GITTAG=v$LUAROCKS_VER
+  matrix:
+    - LUA=lua5.1 LUA_DEV=liblua5.1-dev LUA_VER=5.1 LUA_SFX=5.1 LUA_INCDIR=/usr/include/lua5.1
+    - LUA=lua5.2 LUA_DEV=liblua5.2-dev LUA_VER=5.2 LUA_SFX=5.2 LUA_INCDIR=/usr/include/lua5.2
+    - LUA=luajit LUA_DEV=libluajit-5.1-dev LUA_VER=5.1 LUA_SFX=jit LUA_INCDIR=/usr/include/luajit-2.0
+
+branches:
+  only:
+    - master
+
+before_install:
+  - bash .travis/setup_lua.sh
+
+install:
+  - sudo luarocks install lzmq-timer
+  - sudo luarocks install lunitx
+  - sudo luarocks make rockspecs/luq-scm-0.rockspec
+
+script:
+  - cd test
+  - lunit.sh -i lua$LUA_SFX test_pool.lua
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always

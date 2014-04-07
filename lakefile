@@ -1,0 +1,29 @@
+PROJECT = 'luq'
+
+INITLAKEFILE()
+
+DEFINES = L{DEFINES, 
+  IF(WINDOWS,  'DLL_EXPORT',  '');
+  IF(not MSVC, 'USE_PTHREAD', '');
+}
+
+core = c.shared{'luq',
+  base     = 'src',
+  src      = '*.c',
+  needs    = LUA_NEED,
+  defines  = DEFINES,
+  dynamic  = DYNAMIC,
+  strip    = true,
+  libs     = IF(not MSVC, 'pthread');
+}
+
+target('build', core)
+
+install = target('install', {
+  file.group{odir=LIBDIR;  src = core                           };
+  file.group{odir=TESTDIR; src = J('test', '*'); recurse = true };
+})
+
+target('test', install, function()
+  run_test('test_pool.lua')
+end)
