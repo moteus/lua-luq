@@ -11,7 +11,7 @@ local ztimer = require "lzmq.timer"
 
 local QUEUE_NAME   = "lzmq/pool/"
 local POINTER_SIZE = luq.pointer_size()
-local POINTER      = ("\255"):rep(POINTER_SIZE)
+local POINTER      = ("\0"):rep(POINTER_SIZE)
 
 local function return_count(...)
   return select('#', ...), ...
