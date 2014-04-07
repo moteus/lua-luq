@@ -4,6 +4,12 @@
 #include <stdlib.h>
 #include "luq_qvoid.h"
 
+// CLOCK_MONOTONIC_RAW does not work on travis-ci and on LinuxMint 15
+// it returns ETIMEDOUT immediately
+#ifdef CLOCK_MONOTONIC_RAW
+#  undef CLOCK_MONOTONIC_RAW
+#endif
+
 int qvoid_init(qvoid_t *q){
   pthread_condattr_t *pcondattr = NULL;
 
