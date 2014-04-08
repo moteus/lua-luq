@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(LUA_DIR_5_2)\include"
+				AdditionalIncludeDirectories="$(LUA_DIR)\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LUQ_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,10 +61,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua52.lib"
+				AdditionalOptions="/EXPORT:luaopen_luq"
+				AdditionalDependencies="lua5.1.lib"
 				OutputFile="$(OutDir)luq.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(LUA_DIR_5_2)\lib"
+				AdditionalLibraryDirectories="$(LUA_DIR)\lib"
 				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
 				SubSystem="2"

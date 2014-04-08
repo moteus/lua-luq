@@ -43,16 +43,19 @@ static void nl_push_back_element(named_list_t *list, named_list_element_t *elem)
 }
 
 static void nl_remove_element(named_list_t *list, named_list_element_t *elem){
+  if(!list->head) return;
+
+  if(elem->prev) elem->prev->next = elem->next;
+  if(elem->next) elem->next->prev = elem->prev;
+
   if(elem == list->head){
     list->head = list->head->next;
   }
-  else if(elem == list->tail){
+
+  if(elem == list->tail){
     list->tail = list->tail->prev;
   }
-  else{
-    elem->prev->next = elem->next;
-    elem->next->prev = elem->prev;
-  }
+
   elem->next = elem->prev = NULL;
 }
 
@@ -131,7 +134,43 @@ void luq_map_self_test(){
   }
 
   nl_clear(list);
+  assert(list->head == list->tail);
   assert(0 == list->head);
+
+  elem = nl_ensure_name(list, "1");
+  assert(list->head == list->tail);
+  assert(list->head == elem);
+
+  nl_remove_element(list, elem);
+  assert(list->head == list->tail);
+  assert(0 == list->head);
+
+  nl_ensure_name(list, "1");
+  elem = nl_ensure_name(list, "2");
+  assert(list->head != list->tail);
+  assert(list->tail == elem);
+
+  nl_remove_element(list, elem);
+  assert(list->head == list->tail);
+
+  elem = nl_ensure_name(list, "2");
+  elem = list->head;
+
+  nl_remove_element(list, elem);
+  assert(list->head == list->tail);
+
+  elem = nl_ensure_name(list, "3");
+  assert(list->head != list->tail);
+  assert(list->tail == elem);
+
+  nl_ensure_name(list, "4");
+  assert(list->head->next == elem);
+
+  nl_remove_element(list, elem);
+  assert(list->head->next == list->tail);
+  assert(list->tail->prev == list->head);
+
+  nl_clear(list);
 }
 
 int luq_map_init(luq_map_t *map){
