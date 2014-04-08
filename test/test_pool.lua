@@ -34,6 +34,7 @@ end
 
 function teardown()
   q:clear()
+  luq.close(q)
   q = nil
 end
 
@@ -69,7 +70,6 @@ function test_timeout()
 
   assert_equal(0, q:put(POINTER))
   assert_userdata(q:get_timeout(timeout))
-
 end
 
 function test_clear()
