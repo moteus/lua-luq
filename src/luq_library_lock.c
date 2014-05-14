@@ -44,7 +44,7 @@ void luq_library_unlock(){
 
 #include <pthread.h>
 
-pthread_mutex_t luq_global_lock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t luq_global_lock = PTHREAD_MUTEX_INITIALIZER;
 
 void luq_library_lock(){
   pthread_mutex_lock(&luq_global_lock);
