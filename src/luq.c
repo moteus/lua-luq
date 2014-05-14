@@ -5,13 +5,18 @@
 #include <stdlib.h>
 #include <memory.h>
 
+#if defined(_MSC_VER)
+#  define LLUQ_EXPORT __declspec(dllexport)
+#else
+#  define LLUQ_EXPORT
+#endif
+
 static luq_map_t luq_global_queue  = {0};
 static luq_map_t luq_global_shared = {0};
 volatile static int LUQ_INIT = 0;
 
 #define LLUQ_FLAG_TYPE unsigned char
 #define LLUQ_FLAG_OPEN (LLUQ_FLAG_TYPE)1 << 0
-
 
 //{ Lua interface
 
@@ -244,7 +249,7 @@ static void lluq_cleanup(void*ctx){
   luq_map_destroy(&luq_global_shared);
 }
 
-int luaopen_luq(lua_State *L){
+LLUQ_EXPORT int luaopen_luq(lua_State *L){
   if(!LUQ_INIT){
     luq_library_lock();
     if(!LUQ_INIT){
