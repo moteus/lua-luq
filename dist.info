@@ -1,0 +1,12 @@
+name = "luq"
+version = "0.1.0"
+
+desc = "Light userdata queue."
+author = "Alexey Melnichuk"
+license = "MIT/X11"
+url = "https://github.com/moteus/lua-luq"
+maintainer = "Alexey Melnichuk"
+
+depends = {
+  "lua > 5.1"
+}
