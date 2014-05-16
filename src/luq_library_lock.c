@@ -56,4 +56,14 @@ void luq_library_unlock(){
 
 // @todo implement calling `luq_global_on_unload` when library unload
 
+#ifdef __GNUC__
+
+static void __attribute__ ((destructor)) luq_on_unload(void){
+  if(luq_global_on_unload){
+    luq_global_on_unload(luq_global_on_unload_ctx);
+  }
+}
+
+#endif
+
 #endif
