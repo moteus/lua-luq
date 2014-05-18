@@ -14,8 +14,6 @@ set ( LUQ_SOURCE
   src/luq_map.c  src/luq_pthread.c      src/luq_qvoid.c
 )
 
-set ( LUQ_SOURCE USE_SHA1 )
-
 install_lua_module ( luq ${LUQ_SOURCE} LINK ${CMAKE_THREAD_LIBS_INIT} )
 
 install_data ( README.md LICENSE )
