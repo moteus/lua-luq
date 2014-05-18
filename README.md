@@ -1,6 +1,7 @@
 lua-luq
 =======
 [![Build Status](https://travis-ci.org/moteus/lua-luq.svg?branch=master)](https://travis-ci.org/moteus/lua-luq)
+[![Build Status](https://buildhive.cloudbees.com/job/moteus/job/lua-luq/badge/icon)](https://buildhive.cloudbees.com/job/moteus/job/lua-luq/)
 
 Light userdata queue
 
