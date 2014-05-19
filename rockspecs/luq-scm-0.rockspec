@@ -22,9 +22,15 @@ build = {
   type = "builtin",
 
   platforms = {
-    unix    = { modules = {
+    linux    = { modules = {
       ["luq"] = {
         libraries = {"pthread", "rt"},
+      }
+    }},
+
+    unix     = { modules = {
+      ["luq"] = {
+        libraries = {"pthread"},
       }
     }},
 
