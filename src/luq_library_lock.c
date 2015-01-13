@@ -21,12 +21,12 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved){
   switch(fdwReason){
   case DLL_PROCESS_ATTACH:
   #if defined(_MSC_VER) && defined(_MT) && defined(_DLL)
-    DisableThreadLibraryCalls(instance);
+    DisableThreadLibraryCalls(hinstDLL);
   #endif
     InitializeCriticalSection(&luq_global_lock);
     break;
   case DLL_PROCESS_DETACH:
-    if(reserved == NULL){
+    if(lpvReserved == NULL){
       DeleteCriticalSection(&luq_global_lock);
       if(luq_global_on_unload){
         luq_global_on_unload(luq_global_on_unload_ctx);
