@@ -96,7 +96,7 @@ static int lluq_qvoid_put_nolock(lua_State *L){
 static int lluq_qvoid_put_timeout(lua_State *L){
   qvoid_t *q = lluq_qvoid_at(L, 1)->q;
   void *data = ensure_lud(L, 2);
-  int ms     = luaL_optint(L, 3, 0);
+  int ms     = (int)luaL_optinteger(L, 3, 0);
   int ret    = qvoid_put_timeout(q, data, ms);
   if(ret == ETIMEDOUT) lua_pushliteral(L, "timeout");
   else lua_pushnumber(L, ret);
@@ -122,7 +122,7 @@ static int lluq_qvoid_get_nolock(lua_State *L){
 static int lluq_qvoid_get_timeout(lua_State *L){
   qvoid_t *q = lluq_qvoid_at(L, 1)->q;
   void *data;
-  int ms = luaL_optint(L, 2, 0);
+  int ms = (int)luaL_optinteger(L, 2, 0);
   int rc = qvoid_get_timeout(q, &data, ms);
   if(rc == 0)lua_pushlightuserdata(L, data);
   else if(rc == ETIMEDOUT)
