@@ -38,7 +38,6 @@ int pthread_cond_timedwait_timeout(pthread_cond_t *cond, pthread_mutex_t *mutex,
 typedef HANDLE pthread_mutex_t;
 typedef HANDLE pthread_cond_t;
 typedef void pthread_mutexattr_t;
-typedef HANDLE pthread_cond_t;
 typedef void pthread_condattr_t;
 
 int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
