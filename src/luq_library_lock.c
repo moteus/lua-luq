@@ -17,7 +17,7 @@ void luq_library_on_unload(pfn_on_unload fn, void *ctx){
 
 static CRITICAL_SECTION luq_global_lock;
 
-#if defined(__GNUC__)
+#if 0 && defined(__GNUC__)
 
 /* I do not use DllMain because not sure should I call `DisableThreadLibraryCalls`
  * so I hope default DllMain do right job
@@ -48,7 +48,7 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved){
   #endif
 
   // I think this should works but not tested.
-  #if 0 && defined(__GNUC__) && defined(_DLL)
+  #if defined(__GNUC__) && defined(_DLL)
     DisableThreadLibraryCalls(hinstDLL);
   #endif
 
