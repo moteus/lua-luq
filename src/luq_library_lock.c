@@ -17,7 +17,7 @@ void luq_library_on_unload(pfn_on_unload fn, void *ctx){
 
 static CRITICAL_SECTION luq_global_lock;
 
-#if 0 && defined(__GNUC__)
+#if defined(__GNUC__)
 
 /* I do not use DllMain because not sure should I call `DisableThreadLibraryCalls`
  * so I hope default DllMain do right job
@@ -27,8 +27,7 @@ static void __attribute__ ((constructor)) luq_on_load(void){
 }
 
 /* There no way to determine reason of unload. And it may be not
- * safe call `luq_global_on_unload` if we in process terminatino
- * stage.
+ * safe call `luq_global_on_unload` if process in termination stage.
  */
 static void __attribute__ ((destructor)) luq_on_unload(void){
   DeleteCriticalSection(&luq_global_lock);

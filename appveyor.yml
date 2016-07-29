@@ -30,6 +30,7 @@ matrix:
 # Is there a better way? Like injecting an array in the matrix?
 configuration:
   - 2015
+  - MinGW
 
 platform:
   - x86
