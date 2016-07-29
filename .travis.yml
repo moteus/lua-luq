@@ -34,12 +34,15 @@ install:
   - luarocks make rockspecs/luq-scm-0.rockspec
 
 before_script:
-  - luarocks show lunitx     || luarocks install lunitx
-  - luarocks show lzmq-timer || luarocks install lzmq-timer
+  - luarocks show lunitx        || luarocks install lunitx
+  - luarocks show lzmq-timer    || luarocks install lzmq-timer
+  - luarocks show luafilesystem || luarocks install luafilesystem
+  - luarocks show lua-path      || luarocks install lua-path
 
 script:
   - cd test
   - lunit.sh test_pool.lua
+  - lunit.sh test_final.lua
 
 notifications:
   email:
