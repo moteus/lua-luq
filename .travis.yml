@@ -39,7 +39,7 @@ before_script:
 
 script:
   - cd test
-  - lunit.sh run.lua
+  - lunit.sh test_pool.lua
 
 notifications:
   email:
